@@ -1,7 +1,7 @@
 # Read Me First
 The following was discovered as part of building this project:
 
-* The original package name 'com.example.msa-service' is invalid and this project uses 'com.example.msaservice' instead.
+* The original package name 'com.example.msa-service' is invalid and this project uses 'com.example.glossaryapi' instead.
 
 # Getting Started
 
