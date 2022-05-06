@@ -18,4 +18,4 @@ Glossary 의 데이터를 주고받기 위한 API 입니다.
 ### 인증 토큰
 일부 요청은 API Gateway 를 통해 인증 토큰 검사를 합니다.
 
-Authorization API(https://~~~.com) 를 통해서 인증 토큰을 획득 해서 요청 해주세요.
+[Authorization API](https://github.com/DeokhunKim/JWT-Authorization) 를 통해서 인증 토큰을 획득 해서 요청 해주세요.
