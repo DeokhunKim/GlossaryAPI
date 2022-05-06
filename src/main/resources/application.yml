@@ -1,2 +1,28 @@
 server:
   port: 8001
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #url: jdbc:mysql://mysql:3306/dockerDB?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://localhost:3307/dockerDB?serverTimezone=Asia/Seoul
+    username: admin
+    password: admin
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+      #ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: false
+        format_sql: false
+
+
+  application:
+    name: glossaryapi
+
+
+logging.level:
+  org.hibernate.SQL: info
+#  org.hibernate.type: trace
