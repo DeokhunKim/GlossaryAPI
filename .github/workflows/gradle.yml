@@ -32,18 +32,20 @@ jobs:
         
     - name: Shutdown Ubuntu MySQL (SUDO)
       run: sudo service mysql stop # Shutdown the Default MySQL, "sudo" is necessary, please not remove it
-    
+      
     - name: Setup MySQL
-      uses: samin/mysql-action@v1.3
+      uses: mirromutth/mysql-action@v1.1
       with:
-        character set server: 'utf8' # Optional, default value is 'utf8mb4'. The '--character-set-server' option for mysqld
-        collation server: 'utf8_general_ci' # Optional, default value is 'utf8mb4_general_ci'. The '--collation-server' option for mysqld
-        mysql version: '8.0' # Optional, default value is "latest". The version of the MySQL
-        mysql database: 'dockerDB' # Optional, default value is "test". The specified database which will be create
-        mysql root password: ${{ secrets.MYSQL_PASSWORD }} # Required if "mysql user" is empty, default is empty. The root superuser password
-        mysql user: 'admin' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
-        mysql password: ${{ secrets.MYSQL_PASSWORD }} # Required if "mysql user" exists. The password for the "mysql user"
-    
+        mysql version: '8.0'# optional, default is latest
+        # MYSQL_ROOT_PASSWORD - root superuser password
+        mysql root password: ${{ secrets.MYSQL_PASSWORD }}# optional, default is 
+        # MYSQL_DATABASE - name for the default database that is created
+        mysql database: 'dockerDB'# optional, default is 
+        # MYSQL_USER - create the specified user with superuser power for created database
+        mysql user: 'admin'# optional, default is 
+        # MYSQL_PASSWORD - specified superuser password which user is power for created database
+        mysql password: ${{ secrets.MYSQL_PASSWORD }}# optional, default is 
+
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
       
