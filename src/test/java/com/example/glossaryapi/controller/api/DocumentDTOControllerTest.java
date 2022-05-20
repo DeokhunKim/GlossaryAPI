@@ -29,8 +29,7 @@ class DocumentDTOControllerTest {
 
     @Test
     public void responseStatusOK() throws Exception {
-        mvc.perform(get("/glossary/testtitle").session(mockHttpSession))
-                .andExpect(status().isOk());
+
 
     }
 

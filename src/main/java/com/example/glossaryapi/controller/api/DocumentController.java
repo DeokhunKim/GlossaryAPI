@@ -33,12 +33,6 @@ public class DocumentController {
 
         Enumeration<String> headers = request.getHeaderNames();
         Iterator<String> stringIterator = headers.asIterator();
-        while (stringIterator.hasNext()) {
-            String next = stringIterator.next();
-            String header = request.getHeader(next);
-            System.out.println(next + ": " +header);
-        }
-
         response.setStatus(HttpServletResponse.SC_OK);
         if (keyword == null || keyword.equals("")) {
             return documentService.findAll();

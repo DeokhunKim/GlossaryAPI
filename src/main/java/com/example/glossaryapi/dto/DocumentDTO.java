@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 @Getter
 public class DocumentDTO {
     public String title;
-    public ArrayList<String> synonym = new ArrayList<>();
+    public ArrayList<String> synonym;
     public ContentDTO content;
 
     public DocumentDTO(String title, ArrayList<String> synonym, ContentDTO content) {
