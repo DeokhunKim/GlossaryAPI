@@ -13,6 +13,7 @@ Glossary 의 데이터를 주고받기 위한 API 입니다.
 | /api/glossary/{title}         | POST  | 신규 문서 작성        | Y       |
 | /api/glossary/{title}         | PATCH | 문서 이름 변경        | Y       |
 | /api/glossary/{title}         | PUT   | 문서 내용 전체 업데이트    | Y       |
+| /api/glossary/{title}         | DELETE | 해당 문서 삭제       | Y       |
 | /api/glossary/{title}/history | GET   | 해당 문서의 변경 내역 조회 | N       |
 
 <br/>
