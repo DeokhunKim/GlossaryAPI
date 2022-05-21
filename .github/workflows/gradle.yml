@@ -28,7 +28,22 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
-    - name: Build with Gradle
-      uses: gradle/gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
+        
+        
+    - name: Shutdown Ubuntu MySQL (SUDO)
+      run: sudo service mysql stop # Shutdown the Default MySQL, "sudo" is necessary, please not remove it
+      
+    - name: Setup MySQL
+      uses: mirromutth/mysql-action@v1.1
       with:
-        arguments: build
+        mysql version: '8.0' # optional, default is latest
+        mysql root password: ${{ secrets.MYSQL_PASSWORD }} # optional, default is 
+        mysql database: 'dockerDB' # optional, default is 
+        mysql user: 'admin' # optional, default is 
+        mysql password: ${{ secrets.MYSQL_PASSWORD }} # optional, default is 
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+      
+    - name: Build with Gradle
+      run: ./gradlew build -x test
