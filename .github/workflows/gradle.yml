@@ -9,9 +9,9 @@ name: Java CI with Gradle
 
 on:
   push:
-    branches: [ main ]
+    #branches: [ main ]
   pull_request:
-    branches: [ main ]
+    #branches: [ main ]
 
 permissions:
   contents: read
@@ -45,10 +45,23 @@ jobs:
       run: ./gradlew build -x test
       
       
-    - name: Docker build 
+    - name: Docker build and push to docker hub
       run: |
         docker login -u ${{ secrets.DOCKER_ID }} -p ${{ secrets.DOCKER_PASSWORD }} 
         docker build -t glossaryapi . 
         docker tag glossaryapi ${{ secrets.DOCKER_ID }}/glossaryapi:${GITHUB_SHA::7} 
         docker push ${{ secrets.DOCKER_ID }}/glossaryapi:${GITHUB_SHA::7}
+    
+    - name: Deploy to AWS EC2
+      uses: appleboy/ssh-action@master
+      with:
+        host: http://ec2-3-129-208-120.us-east-2.compute.amazonaws.com
+        username: ec2-user
+        key: ${{ secrets.AWS_PEM }}
+        envs: GITHUB-SHA
+        script: |
+          docker pull ${{ secrets.DOCKER_ID }}/glossaryapi:${GITHUB_SHA::7}
+          docker tag ${{ secrets.DOCKER_ID }}/glossaryapi:${GITHUB_SHA::7} glossaryapi
+          docker stop glossaryapi
+          docker run -d --rm --name glossaryapi 
 
