@@ -29,10 +29,6 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         
-        
-    - name: Shutdown Ubuntu MySQL (SUDO)
-      run: sudo service mysql stop # Shutdown the Default MySQL, "sudo" is necessary, please not remove it
-      
     - name: Setup MySQL
       uses: mirromutth/mysql-action@v1.1
       with:
@@ -47,3 +43,12 @@ jobs:
       
     - name: Build with Gradle
       run: ./gradlew build -x test
+      
+      
+    - name: Docker build 
+      run: |
+        docker login -u ${{ secrets.DOCKER_ID }} -p ${{ secrets.DOCKER_PASSWORD }} 
+        docker build -t GlossaryAPI . 
+        docker tag GlossaryAPI ${{ secrets.DOCKER_ID }}/GlossaryAPI:${GITHUB_SHA::7} 
+        docker push ${{ secrets.DOCKER_ID }}/GlossaryAPI:${GITHUB_SHA::7}
+
