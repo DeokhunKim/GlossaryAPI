@@ -63,5 +63,5 @@ jobs:
           docker pull ${{ secrets.DOCKER_ID }}/glossaryapi:${GITHUB_SHA::7}
           docker tag ${{ secrets.DOCKER_ID }}/glossaryapi:${GITHUB_SHA::7} glossaryapi
           docker stop glossaryapi
-          docker run -d --rm --name glossaryapi 
+          docker run -d --rm --name glossaryapi --network kpp -e SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/glossary?useSSL=false glossaryapi
 
