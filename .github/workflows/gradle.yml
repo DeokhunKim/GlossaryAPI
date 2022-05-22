@@ -28,15 +28,6 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
-        
-    - name: Setup MySQL
-      uses: mirromutth/mysql-action@v1.1
-      with:
-        mysql version: '8.0' # optional, default is latest
-        mysql root password: ${{ secrets.MYSQL_PASSWORD }} # optional, default is 
-        mysql database: 'glossary' # optional, default is 
-        mysql user: 'admin' # optional, default is 
-        mysql password: ${{ secrets.MYSQL_PASSWORD }} # optional, default is 
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
@@ -63,5 +54,5 @@ jobs:
           docker pull ${{ secrets.DOCKER_ID }}/glossaryapi:${GITHUB_SHA::7}
           docker tag ${{ secrets.DOCKER_ID }}/glossaryapi:${GITHUB_SHA::7} glossaryapi
           docker stop glossaryapi
-          docker run -d --rm --name glossaryapi --network kpp -e SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/glossary?useSSL=false glossaryapi
+          docker run -d --rm --name glossaryapi --network kpp -e SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/glossary?useSSL=false -e SPRING_DATASOURCE_USERNAME=${{ secrets.MYSQL_USERNAME }} -e SPRING_DATASOURCE_PASSWORD=${{ secrets.MYSQL_PASSWORD }} glossaryapi
 
