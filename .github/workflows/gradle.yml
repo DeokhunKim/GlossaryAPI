@@ -51,6 +51,7 @@ jobs:
         key: ${{ secrets.AWS_PEM }}
         envs: GITHUB-SHA
         script: |
+          echo tagname ${GITHUB_SHA::7}
           docker pull ${{ secrets.DOCKER_ID }}/glossaryapi:${GITHUB_SHA::7}
           docker tag ${{ secrets.DOCKER_ID }}/glossaryapi:${GITHUB_SHA::7} glossaryapi
           docker stop glossaryapi
