@@ -4,9 +4,6 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://mysql_mysql-db_1:3306/glossary?serverTimezone=Asia/Seoul
-    username: root
-    password: admin
 
   jpa:
     hibernate:
