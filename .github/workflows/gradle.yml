@@ -49,9 +49,8 @@ jobs:
         host: ec2-15-164-212-128.ap-northeast-2.compute.amazonaws.com
         username: ec2-user
         key: ${{ secrets.AWS_PEM }}
-        envs: GITHUB-SHA
+        envs: GITHUB_SHA
         script: |
-          echo tagname ${GITHUB_SHA::7}
           docker pull ${{ secrets.DOCKER_ID }}/glossaryapi:${GITHUB_SHA::7}
           docker tag ${{ secrets.DOCKER_ID }}/glossaryapi:${GITHUB_SHA::7} glossaryapi
           docker stop glossaryapi
